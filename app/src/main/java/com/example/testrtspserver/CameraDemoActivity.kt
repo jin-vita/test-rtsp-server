@@ -53,6 +53,13 @@ class CameraDemoActivity : AppCompatActivity(), ConnectChecker, ClientListener, 
     }
 
     private fun prepare(): Boolean {
+        rtspServerCamera1.resolutionsBack.forEach{
+            Log.d(TAG, "resolutionsBack ${it.height} * ${it.width}")
+        }
+        rtspServerCamera1.resolutionsFront.forEach{
+            Log.d(TAG, "resolutionsFront ${it.height} * ${it.width}")
+        }
+
 //        val prepared = rtspServerCamera1.prepareAudio() && rtspServerCamera1.prepareVideo(1280, 720, 10, 300 * 1024, 0)
 //        val prepared = rtspServerCamera1.prepareAudio() && rtspServerCamera1.prepareVideo(800, 600, 10, 300 * 1024, 0)
         val prepared = rtspServerCamera1.prepareAudio() && rtspServerCamera1.prepareVideo()
@@ -110,16 +117,16 @@ class CameraDemoActivity : AppCompatActivity(), ConnectChecker, ClientListener, 
     }
 
     override fun onClientConnected(client: ServerClient) {
-        toast("Client connected: ${client.getAddress()}")
+        toast("Client connected: ${client.clientAddress}")
     }
 
     override fun onClientDisconnected(client: ServerClient) {
-        toast("Client disconnected: ${client.getAddress()}")
+        toast("Client disconnected: ${client.clientAddress}")
     }
 
-    override fun onClientNewBitrate(bitrate: Long, client: ServerClient) {
-        Log.d(TAG, "onClientNewBitrate: $bitrate")
-    }
+//    override fun onClientNewBitrate(bitrate: Long, client: ServerClient) {
+//        Log.d(TAG, "onClientNewBitrate: $bitrate")
+//    }
 
     override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
         if (!rtspServerCamera1.isOnPreview && isInit) {

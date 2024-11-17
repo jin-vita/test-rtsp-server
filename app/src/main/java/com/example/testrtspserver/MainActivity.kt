@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         val bCameraDemo = findViewById<Button>(R.id.b_camera_demo)
         bCameraDemo.setOnClickListener { checkPermission() }
-//        restartAfterCrash()
+        restartAfterCrash()
         checkPermission()
     }
 
